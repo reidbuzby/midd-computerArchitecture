@@ -1,0 +1,39 @@
+;Zniac Multiplication program
+;Reid Buzby
+;2016 - 03 - 20
+;
+;Multiplies the two numbers located in 0x18 and 0x19 and stores the product in A
+
+00:      ld A, N1  ;000 11000  0x18
+01:      sub A, C1 ;001 10011  0x33
+02:      bneg end2 ;101 10001  0xB1
+03:      ld A, N2  ;000 11001  0x19
+04:      st A, P   ;011 11010  0x7A
+05:loop: ld A, N1  ;000 11000  0x18
+06:      sub A, C2 ;001 10100  0x34
+07:      bneg end1 ;101 01111  0xAF
+08:      ld A, P   ;000 11010  0x1A
+09:      add A, N2 ;010 11001  0x59
+0a:      st A, P   ;011 11010  0x7A
+0b:      ld A, N1  ;000 11000  0x18
+0c:      sub A, C1 ;001 10011  0x33
+0d:      st A, N1  ;011 11000  0x78
+0e:      b loop    ;100 00101  0x85
+0f:end1: ld P      ;000 11010  0x1A
+10:      halt      ;111 11111  0xFF
+11:end2: ld A, N1  ;000 11000  0x18
+12:      halt      ;111 11111  0xFF
+13: C1:  1         ;000 00001  0x1
+14: C2:  2         ;000 00010  0x2
+
+18: N1:
+19: N2:
+20: P:
+
+
+/*
+This program only multiplies negative numbers successfully if N1 is positive and N2 is negative. This is
+because it will repeatedly add the second number to the total, resulting in the correct product no matter
+what is in N2. However, if N1 is negative it would repeat addition a negative amount of times, resulting
+in the incorrect product.
+*/

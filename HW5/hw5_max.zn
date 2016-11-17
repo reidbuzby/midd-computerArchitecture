@@ -1,0 +1,17 @@
+;Zniac max program
+;Reid Buzby
+;2016 - 03 - 20
+;
+;Computes the max between numbers located at 0x18 and 0x19 and stores it in A
+
+
+00:      ld A, N1   ;000 11000  0x18
+01:      sub A, N2  ;001 11001  0x39
+02:      bneg end   ;101 00101  0xA5
+03:      ld A, N1   ;000 11000  0x18
+04:      b halt     ;100 00110  0x86
+05: end  ld A, N2   ;000 11001  0x19
+06: halt halt       ;111 1111   0xFF
+
+18: N1:
+19: N2:

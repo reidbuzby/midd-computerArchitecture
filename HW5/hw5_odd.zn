@@ -1,0 +1,16 @@
+;Zniac Even or Odd program
+;Reid Buzby
+;2016 - 03 - 20
+;
+;Check whether the number located in 0x18 is even or odd. If it is even, it stores 0 in A, if it
+;is odd it stores 1 in A.
+
+00:       ld A, N1    ;000 11000  0x18
+01: loop: sub A, C1   ;001 00110  0x26
+02:       bneg end    ;101 00100  0xA4
+03:       b loop      ;100 00001  0x81
+04: end:  add A, C1   ;010 00110  0x46
+05:       halt        ;111 11111  0xFF
+06: C1:   2           ;000 00010  0x2w
+
+18: N1:
